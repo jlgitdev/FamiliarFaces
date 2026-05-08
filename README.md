@@ -1,16 +1,23 @@
+# FamiliarFaces
+
 <p align="center">
   <a href="https://youtu.be/dEbYshVMDz0"><strong>Watch the Demo Video</strong></a>
 </p>
 
-# FamiliarFaces
+<p align="center">
+  <img src="docs/assets/screenshot1.png" alt="FamiliarFaces patient recognition view example with fake person" width="900">
+</p>
 
 FamiliarFaces is a browser-based companion app for dementia support. It uses a
 live camera feed to recognize enrolled visitors and shows simple context about
 who they are, their relationship to the patient, and recent conversation notes.
 
+> Prototype note: FamiliarFaces handles sensitive biometric and conversation data, so do not use it with real patient or caregiver data without authentication, encryption, and consent controls.
+
 The app is built as a local-first Next.js prototype. Face recognition runs in
-the browser with local model files, profile data is stored in SQLite through
-Prisma, and conversation summaries can be generated with a local Ollama model.
+the browser with bundled model files, profile data is stored in SQLite through
+Prisma, and conversation summaries can be generated locally with Ollama. Speech
+transcription depends on the browser's `SpeechRecognition` implementation.
 
 ## Features
 
@@ -74,6 +81,8 @@ npm run db:generate
 npm run db:push
 ```
 
+This creates a local `prisma/familiarfaces.db` file, which is ignored by Git.
+
 Start the development server:
 
 ```bash
@@ -112,12 +121,15 @@ move the Prisma datasource to a hosted database. Camera access generally
 requires HTTPS outside of `localhost`, and speech recognition support depends on
 the user's browser.
 
-This prototype does not include authentication or role-based access control. Add
-those before using the app with real patient or caregiver data.
+Before using the app beyond a local demo, add authentication, role-based access
+control, encryption at rest, and consent/data deletion workflows.
 
 ## Project Structure
 
 ```text
+docs/
+  assets/                     README screenshots and media
+
 prisma/
   schema.prisma              Prisma models
 
@@ -175,9 +187,13 @@ npm run db:push      Apply the Prisma schema to SQLite
 npm run db:studio    Open Prisma Studio
 ```
 
-## Privacy Notes
+## Privacy and Limitations
 
 FamiliarFaces stores face embeddings, relationship details, and conversation
 transcripts in a local SQLite database. This data should be treated as private.
 The current version is intended as a prototype and does not include
-authentication, encryption, or consent management.
+authentication, encryption, consent management, automated tests, or clinical
+validation.
+
+The face-api.js model files are included in `public/models` so recognition can
+run without fetching model weights from a remote server at runtime.
