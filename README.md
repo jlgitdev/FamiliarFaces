@@ -8,8 +8,8 @@
   <img src="docs/assets/screenshot1.png" alt="FamiliarFaces patient recognition view example with fake person" width="900">
 </p>
 
-FamiliarFaces is a browser-based companion app for dementia support. It uses a
-live camera feed to recognize enrolled visitors and shows simple context about
+FamiliarFaces is a browser-based companion app for dementia support build for a hackathon. 
+It uses a live camera feed to recognize enrolled visitors and shows simple context about
 who they are, their relationship to the patient, and recent conversation notes.
 
 > Prototype note: FamiliarFaces handles sensitive biometric and conversation data, so do not use it with real patient or caregiver data without authentication, encryption, and consent controls.
